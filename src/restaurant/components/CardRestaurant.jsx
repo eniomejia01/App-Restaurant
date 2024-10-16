@@ -1,45 +1,68 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Grid2, Typography } from "@mui/material";
-import { cardData } from "../../assets/data";
-import { red } from "@mui/material/colors";
+import { Button, Card, CardActionArea, CardContent, CardMedia, Grid2, Typography } from "@mui/material";
+import { dataMenuAll } from "../../assets/dataMenuAll";
+import { Check, CheckBox } from "@mui/icons-material";
+import { useState } from "react";
 
 
 
-export const RestaurantContent = () => {
+export const CardRestaurant = () => {
+
+    const [selectedItems, setSelectedItems] = useState({});
+
+    const handleAddItem = (itemId) => {
+        setSelectedItems(prev => ({
+            ...prev,
+            [itemId]: !prev[itemId]
+        }));
+    };
+
     return (
-        <>
-            <Box sx={{ width: "100%", mb: 4 }}>
-                <Typography
-                    variant="h4"
-                    component="h1"
-                    sx={{
-                        fontWeight: "bold",
-                        textAlign: "center",
-                    }}
-                >
-                    Especialidades del día
-                </Typography>
-            </Box>
-
-
-
+        <div className="animate__animated animate__fadeIn">
             <Grid2 container spacing={1} columns={{ xs: 6, sm: 6, md: 12 }}>
-                {cardData.map((item) => (
+                {dataMenuAll.map((item) => (
                     <Grid2 key={item.id} xs={6} sm={6} md={3} lg={4} size={ { xs: 3, sm: 3, md: 3, lg: 4} }>
                         <Card
                             sx={{
                                 mx: "auto",
-                                mb: 0,
+                                mb: 2,
                                 maxWidth: { xs: "100%", sm: 345 },
-
                             }}
+                            key={item.id}
                         >
-                            <CardActionArea >
+                            <div>
+
+
+                                <CardActionArea>
+                                    <div>
+                                        {selectedItems[item.id] && (
+                                            <div>
+                                                <Check sx={{ 
+                                                        width: 30,
+                                                        height: 30,
+                                                        position: 'absolute', 
+                                                        marginTop: '0', 
+                                                        marginRight: '0', 
+                                                        backgroundColor: 'white', 
+                                                        color: 'black',
+                                                        borderRadius: 12,
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                        margin: .5,
+                                                        padding: .5,
+                                                        
+                                                    }} 
+                                                />
+                                            </div>
+                                        )}
+
+                                    </div>
                                     <CardMedia
                                         component="img"
                                         // height="100"
-                                        image={`/src/assets/${item.image}.jpg`}
+                                        image={`/src/assets/${item.image}.webp`}
                                         alt={item.title}
-                                        sx={{ height: { xs: 100, sm: 100, md: 190 }, objectFit: 'cover' }}
+                                        sx={{ height: { xs: 100, sm: 100, md: 190 }, objectFit: 'cover',  }}
                                     />
                                     <CardContent>
                                         <Typography 
@@ -72,9 +95,9 @@ export const RestaurantContent = () => {
                                         >
                                             {item.description} 
                                         </Typography>
-
                                     </CardContent>
                                 </CardActionArea>
+                            </div>
                             {/* Contenido de la card */}
                             <Button 
                                 variant="text" 
@@ -91,8 +114,9 @@ export const RestaurantContent = () => {
                                         color:'#a93226',
                                     }
                                 }}
+                                onClick={() => handleAddItem(item.id)}
                             >
-                                Agregar
+                                {selectedItems[item.id] ? 'Agregado' : 'Agregar'}
                             
                             </Button>
                         </Card>
@@ -101,9 +125,7 @@ export const RestaurantContent = () => {
             </Grid2>
 
 
+        </div>
+    )
+}
 
-
-
-        </>
-    );
-};

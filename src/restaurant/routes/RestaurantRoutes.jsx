@@ -1,11 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RestaurantLayout } from "../layout/RestaurantLayout";
-import { Menu } from "../views/Menu";
+import { RestaurantPage } from "../pages/RestaurantPage";
 
 export const RestaurantRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<Menu />} />
+            <Route path="/" element={<RestaurantPage />} />
             <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
     );

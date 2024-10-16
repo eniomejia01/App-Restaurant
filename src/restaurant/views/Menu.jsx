@@ -10,20 +10,16 @@ import { RestaurantContent } from "../layout/RestaurantContent";
 
 export const Menu = () => {
     return (
-        <RestaurantLayout>
+        <>
             <Container maxWidth="lg">
                 {" "}
                 {/* Añadido Container para centrar todo el contenido */}
                 <Box
-                    sx={{
-                        // display: "flex",
-                        // flexDirection: "column",
-                        // my: 4, // margen vertical
-                    }}
+                    
                 >
                     <RestaurantContent/>
                 </Box>
             </Container>
-        </RestaurantLayout>
+        </>
     );
 }
